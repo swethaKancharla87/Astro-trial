@@ -1,0 +1,26 @@
+---
+import type { Frontmatter } from '../config'
+import Base from '../layouts/base.astro'
+import BlogHero from '../components/bloghero.astro'
+
+export interface Props {
+  frontmatter: Frontmatter
+}
+
+const { frontmatter } = Astro.props as Props
+---
+
+<Base frontmatter={frontmatter}>
+  <main class="mt-10 dark:bg-gray-900">
+    <article class="post">
+      <header>
+        <BlogHero frontmatter={frontmatter} />
+      </header>
+      <section
+        class="px-4 lg:px-0 mt-12 mb-24 max-w-screen-lg mx-auto prose prose-purple lg:prose-xl dark:prose-invert"
+      >
+        <slot />
+      </section>
+    </article>
+  </main>
+</Base>

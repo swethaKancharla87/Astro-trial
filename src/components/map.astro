@@ -1,0 +1,18 @@
+---
+export interface Props {
+  loc: [number, number]
+  zoom: number
+}
+
+const { loc, zoom } = Astro.props as Props
+---
+
+<div id="map" class="mb-3 h-96"></div>
+<script is:inline define:vars={{ loc, zoom }}>
+  var map = L.map('map').setView(loc, zoom)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap',
+  }).addTo(map)
+  var marker = L.marker(loc).addTo(map)
+</script>
